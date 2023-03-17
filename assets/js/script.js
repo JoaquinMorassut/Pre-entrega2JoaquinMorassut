@@ -1,62 +1,90 @@
-alert("Bienvenido a la pagina de electricidad e iluminacion Fosam");
+// Objeto cliente
+const cliente = {
+    nombre: prompt("Ingrese su nombre:"),
+    apellido: prompt("Ingrese su apellido:")
+};
 
-let nombreCliente = prompt("Ingrese su nombre:");
-console.log(`Bienvenido a la tienda de electricidad/iluminación, ${nombreCliente}!`);
+// Objeto productos
+const productos = [
+    { nombre: "bombillas", precio: 2.99 },
+    { nombre: "cables", precio: 4.99 },
+    { nombre: "enchufes", precio: 1.99 }
+];
 
-let nombreApellido = prompt("Ingrese su apellido:");
-console.log(`Bienvenido a la tienda de electricidad/iluminación, ${nombreApellido}!`);
+console.log("Bienvenido a la tienda de electricidad / iluminación, " + cliente.nombre + " " + cliente.apellido + "!");
+alert("a continuación le solicitaremos la cantidad de productos que desee llevar");
 
-alert("a continuacion le solicitaremos la cantidad de productos que desee llevar");
+// Función para obtener la cantidad de cada producto
+function obtenerCantidadProductos(producto) {
+    const cantidad = parseInt(prompt("Ingrese la cantidad de " + producto.nombre + ":"));
 
-let productos = ["bombillas", "cables", "enchufes"];
-console.log(`Los productos disponibles son: ${productos}`);
-
-let precioProductos = [2.99, 4.99, 1.99];
-console.log(`Los precios de los productos son: ${precioProductos}`);
-
-let cantidadProductos = [];
-console.log(`La cantidad de cada producto que has elegido es: ${cantidadProductos}`);
-
-let descuento = 0.1;
-
-// Algoritmos
-let subtotal = 0;
-for (let i = 0; i < productos.length; i++) {
-    let cantidad = parseInt(prompt(`Ingrese la cantidad de ${productos[i]}:`));
-    cantidadProductos.push(cantidad);
-    subtotal += precioProductos[i] * cantidadProductos[i];
+    return { ...producto, cantidad };
 }
-console.log(`El subtotal es: ${subtotal.toFixed(2)}`);
 
-// anidaciones
-let total;
-if (subtotal > 50 && subtotal <= 100) {
-    total = subtotal * (1 - descuento);
-} else if (subtotal > 100) {
-    total = subtotal * (1 - 2 * descuento);
-} else {
-    total = subtotal;
+// Array de cantidad de productos
+const cantidadProductos = productos.map(obtenerCantidadProductos);
+console.log("El subtotal es: ${subtotal.toFixed(2)}");
+
+
+
+
+// Función para calcular el subtotal
+function calcularSubtotal(cantidadProducto) {
+    return cantidadProducto.precio * cantidadProducto.cantidad;
 }
-let totalString = total.toFixed(2);
-let totalNum = parseFloat(totalString);
 
-// Condicionales y estructura if
-let envioGratuito = false;
-if (total >= 50) {
+// Reduce para obtener el subtotal
+const subtotal = cantidadProductos.reduce((acumulador, cantidadProducto) => acumulador + calcularSubtotal(cantidadProducto), 0);
+
+console.log("El subtotal es: ${subtotal.toFixed(2)}");
+
+// Función de descuento
+function obtenerDescuento(subtotal) {
+    if (subtotal > 50 && subtotal <= 100) {
+        return subtotal * descuento;
+    } else if (subtotal > 100) {
+        return subtotal * (2 * descuento);
+    } else {
+        return 0;
+    }
+}
+
+const descuento = 0.1;
+const descuentoTotal = obtenerDescuento(subtotal);
+
+// Función para calcular el total
+function calcularTotal(subtotal, descuento) {
+    return subtotal - descuento;
+}
+
+const total = calcularTotal(subtotal, descuentoTotal);
+const totalString = total.toFixed(2);
+const totalNum = parseFloat(totalString);
+
+// Función para imprimir el mensaje de envío
+function imprimirMensajeEnvio() {
     console.log("¡Felicidades! ¡Tienes derecho a envío gratuito!");
     alert("¡Felicidades! ¡Tienes derecho a envío gratuito!");
+}
+
+// Condicional para envío gratuito
+let envioGratuito = false;
+if (total >= 50) {
+    imprimirMensajeEnvio();
     envioGratuito = true;
 } else {
     console.log("Lamentablemente, no cumples con el monto mínimo para envío gratuito.");
     alert("Lamentablemente, no cumples con el monto mínimo para envío gratuito.");
 }
 
-console.log(`Gracias, ${nombreCliente}! Su compra total fue de ${totalNum.toFixed(2)} y hemos enviado un recibo a su dirección de correo electrónico.`);
-// Scope
-function imprimirMensaje() {
-    let mensaje = "Gracias por tu compra!";
-    console.log(mensaje);
-}
-imprimirMensaje();
+console.log("Gracias, " + cliente.nombre + "! Su compra total fue de " + totalNum.toFixed(2) + " y hemos enviado un recibo a su dirección de correo electrónico.");
+
+// Función para imprimir mensaje de agradecimiento
+function imprimirMensajeAgradecimiento() {
+        let mensaje = "Gracias por tu compra!";
+        console.log(mensaje);
+    }
+
+imprimirMensajeAgradecimiento();
 
 
