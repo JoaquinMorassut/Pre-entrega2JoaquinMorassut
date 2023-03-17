@@ -23,22 +23,18 @@ function obtenerCantidadProductos(producto) {
 
 // Array de cantidad de productos
 const cantidadProductos = productos.map(obtenerCantidadProductos);
-console.log("El subtotal es: ${subtotal.toFixed(2)}");
-
-
-
 
 // Función para calcular el subtotal
 function calcularSubtotal(cantidadProducto) {
     return cantidadProducto.precio * cantidadProducto.cantidad;
 }
 
-// Reduce para obtener el subtotal
-const subtotal = cantidadProductos.reduce((acumulador, cantidadProducto) => acumulador + calcularSubtotal(cantidadProducto), 0);
+const subtotal = cantidadProductos.reduce((acc, curr) => acc + calcularSubtotal(curr), 0);
 
-console.log("El subtotal es: ${subtotal.toFixed(2)}");
+console.log(`El subtotal es: ${subtotal.toFixed(2)}`);
 
 // Función de descuento
+const descuento = 0.1;
 function obtenerDescuento(subtotal) {
     if (subtotal > 50 && subtotal <= 100) {
         return subtotal * descuento;
@@ -49,7 +45,6 @@ function obtenerDescuento(subtotal) {
     }
 }
 
-const descuento = 0.1;
 const descuentoTotal = obtenerDescuento(subtotal);
 
 // Función para calcular el total
@@ -81,10 +76,8 @@ console.log("Gracias, " + cliente.nombre + "! Su compra total fue de " + totalNu
 
 // Función para imprimir mensaje de agradecimiento
 function imprimirMensajeAgradecimiento() {
-        let mensaje = "Gracias por tu compra!";
-        console.log(mensaje);
-    }
+    let mensaje = "Gracias por tu compra!";
+    console.log(mensaje);
+}
 
 imprimirMensajeAgradecimiento();
-
-
