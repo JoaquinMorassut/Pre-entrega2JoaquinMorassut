@@ -1,4 +1,4 @@
-// Objeto cliente
+//   Objeto cliente
 const cliente = {
     nombre: prompt("Ingrese su nombre:"),
     apellido: prompt("Ingrese su apellido:")
@@ -21,10 +21,10 @@ function obtenerCantidadProductos(producto) {
     return { ...producto, cantidad };
 }
 
-// Array de cantidad de productos
+//Array de cantidad de productos
 const cantidadProductos = productos.map(obtenerCantidadProductos);
 
-// Función para calcular el subtotal
+//Función para calcular el subtotal
 function calcularSubtotal(cantidadProducto) {
     return cantidadProducto.precio * cantidadProducto.cantidad;
 }
@@ -33,7 +33,7 @@ const subtotal = cantidadProductos.reduce((acc, curr) => acc + calcularSubtotal(
 
 console.log(`El subtotal es: ${subtotal.toFixed(2)}`);
 
-// Función de descuento
+//Función de descuento
 const descuento = 0.1;
 function obtenerDescuento(subtotal) {
     if (subtotal > 50 && subtotal <= 100) {
@@ -47,7 +47,7 @@ function obtenerDescuento(subtotal) {
 
 const descuentoTotal = obtenerDescuento(subtotal);
 
-// Función para calcular el total
+//Función para calcular el total
 function calcularTotal(subtotal, descuento) {
     return subtotal - descuento;
 }
@@ -56,13 +56,13 @@ const total = calcularTotal(subtotal, descuentoTotal);
 const totalString = total.toFixed(2);
 const totalNum = parseFloat(totalString);
 
-// Función para imprimir el mensaje de envío
+//Función para imprimir el mensaje de envío
 function imprimirMensajeEnvio() {
     console.log("¡Felicidades! ¡Tienes derecho a envío gratuito!");
     alert("¡Felicidades! ¡Tienes derecho a envío gratuito!");
 }
 
-// Condicional para envío gratuito
+//Condicional para envío gratuito
 let envioGratuito = false;
 if (total >= 50) {
     imprimirMensajeEnvio();
@@ -74,7 +74,7 @@ if (total >= 50) {
 
 console.log("Gracias, " + cliente.nombre + "! Su compra total fue de " + totalNum.toFixed(2) + " y hemos enviado un recibo a su dirección de correo electrónico.");
 
-// Función para imprimir mensaje de agradecimiento
+//Función para imprimir mensaje de agradecimiento
 function imprimirMensajeAgradecimiento() {
     let mensaje = "Gracias por tu compra!";
     console.log(mensaje);
